@@ -5,6 +5,9 @@
   "repository": "https://github.com/baozoudashijian/Webpack_Advanced_Configuration.git",
   "author": "Roger Zhang <1787009521@qq.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
   "devDependencies": {
     "@babel/core": "7.12.17",
     "@babel/preset-env": "7.12.17",
