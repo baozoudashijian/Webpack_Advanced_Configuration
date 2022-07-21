@@ -1,4 +1,4 @@
-import { a } from "./a.js";
+import { a } from "@/a.js";
 const b = import('./b.js')
 import { JsxDemo } from "./jsx-demo.jsx";
 import { x } from './ts-demo.ts'

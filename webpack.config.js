@@ -1,5 +1,12 @@
+const path = require('path')
+
 module.exports = {
     mode: 'production',
+    resolve: {
+        alias: {
+            '@': path.join(__dirname, 'src/')
+        }
+    },
     module: {
         rules: [
           {
