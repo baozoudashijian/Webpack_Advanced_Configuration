@@ -4,7 +4,9 @@ import { JsxDemo } from "./jsx-demo.jsx";
 import { x } from './ts-demo.ts'
 import { TsxDemo } from './tsx-demo.tsx'
 import '@/test.scss'
+import vars from '@/export.scss'
 
+console.log(vars)
 console.log(x)
 console.log(TsxDemo)
 
