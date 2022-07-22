@@ -1,64 +1,68 @@
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const mode = 'production'
 
 module.exports = {
-    mode: 'production',
-    output: {
-      filename: '[name].[contenthash].js'
-    },
-    plugins: [new MiniCssExtractPlugin({
+  mode,
+  output: {
+    filename: '[name].[contenthash].js'
+  },
+  plugins: [
+    mode === 'production' && new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
-    })],
-    resolve: {
-        alias: {
-            '@': path.join(__dirname, 'src/')
+    }),
+    new HtmlWebpackPlugin()
+  ].filter(Boolean),
+  resolve: {
+    alias: {
+      '@': path.join(__dirname, 'src/')
+    }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.[jt]sx?$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+              '@babel/preset-react',
+              '@babel/preset-typescript'
+            ]
+          }
         }
-    },
-    module: {
-        rules: [
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          mode === 'production' ? MiniCssExtractPlugin.loader : "style-loader",
+          // Translates CSS into CommonJS
+          // Compiles Sass to CSS
           {
-            test: /\.[jt]sx?$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                presets: [
-                    '@babel/preset-env', 
-                    '@babel/preset-react',
-                    '@babel/preset-typescript'
-                ]
+            loader: "css-loader",
+            options: {
+              modules: {
+                compileType: 'icss'
               }
             }
           },
           {
-            test: /\.s[ac]ss$/i,
-            use: [
-              // Creates `style` nodes from JS strings
-              // "style-loader",
-              MiniCssExtractPlugin.loader,
-              // Translates CSS into CommonJS
-              // Compiles Sass to CSS
-              {
-                loader: "css-loader",
-                options: {
-                  modules: {
-                    compileType: 'icss'
-                  }
-                }
-              },
-              {
-                loader: "sass-loader",
-                options: {
-                  additionalData: `
+            loader: "sass-loader",
+            options: {
+              additionalData: `
                     @import "~@/vars.scss";
                   `,
-                  sassOptions: {
-                    includePaths: [__dirname]
-                  }
-                }
+              sassOptions: {
+                includePaths: [__dirname]
               }
-            ],
+            }
           }
-        ]
+        ],
       }
+    ]
+  }
 }
