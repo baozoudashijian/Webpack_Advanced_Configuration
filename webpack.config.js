@@ -3,7 +3,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     mode: 'production',
-    plugins: [new MiniCssExtractPlugin()],
+    output: {
+      filename: '[name].[contenthash].js'
+    },
+    plugins: [new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
+    })],
     resolve: {
         alias: {
             '@': path.join(__dirname, 'src/')
