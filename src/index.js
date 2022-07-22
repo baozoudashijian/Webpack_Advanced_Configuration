@@ -3,6 +3,7 @@ const b = import('./b.js')
 import { JsxDemo } from "./jsx-demo.jsx";
 import { x } from './ts-demo.ts'
 import { TsxDemo } from './tsx-demo.tsx'
+import '@/test.scss'
 
 console.log(x)
 console.log(TsxDemo)
