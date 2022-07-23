@@ -19,6 +19,9 @@ module.exports = {
       '@': path.join(__dirname, 'src/')
     }
   },
+  optimization: {
+    runtimeChunk: 'single'
+  },
   module: {
     rules: [
       {
