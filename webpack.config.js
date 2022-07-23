@@ -20,7 +20,17 @@ module.exports = {
     }
   },
   optimization: {
-    runtimeChunk: 'single'
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: { // vendor名字随便写
+          minSize: 0, // 如果不写，由于React文件尺寸太小，会跳过
+          test: /[\\/]node_modules[\\/]/, // 匹配node_modules目录
+          name: 'vendors', //文件名
+          chunks: 'all' // all async 异步加载 initial 同步加载
+        }
+      }
+    }
   },
   module: {
     rules: [

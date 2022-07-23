@@ -5,7 +5,9 @@ import { x } from './ts-demo.ts'
 import { TsxDemo } from './tsx-demo.tsx'
 import '@/test.scss'
 import vars from '@/export.scss'
+import React from "react";
 
+console.log(React)
 console.log(vars)
 console.log(x)
 console.log(TsxDemo)
